@@ -16,5 +16,24 @@ class ViewController: UIViewController {
     }
 
 
+    @IBAction func record(_ sender: Any) {
+        AKAudioRecorder.shared.record { (success) in
+            if success {
+                print("success")
+            }
+        }
+    }
+    
+    @IBAction func stop(_ sender: Any) {
+        AKAudioRecorder.shared.stop()
+    }
+    @IBAction func play(_ sender: Any) {
+        AKAudioRecorder.shared.play { (success) in
+            if success {
+                print("success")
+            }
+        }
+        
+    }
 }
 
