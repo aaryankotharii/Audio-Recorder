@@ -68,12 +68,28 @@ class AKAudioRecorder {
         }
     }
 }
+    
+    func stop(completion: @escaping (Bool) -> ()){
+        if audioRecorder != nil{
+            audioRecorder.stop()
+            audioRecorder = nil
+            do {
+                  try audioSession.setActive(false)
+                completion(true)
+              } catch {
+                  print("stop()",error.localizedDescription)
+                completion(false)
+              }
+        }
+    }
 
     
     @objc private func updateDuration() {
         if isRecording && !isPlaying{
             duration += 0.1
         //timeLabel.text = duration.timeStringFormatter
+        }else{
+            timer.invalidate()
         }
        }
     
