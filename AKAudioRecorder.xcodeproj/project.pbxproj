@@ -13,6 +13,7 @@
 		5BDAE8A6244F74C400678726 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAE8A4244F74C400678726 /* Main.storyboard */; };
 		5BDAE8A8244F74CE00678726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAE8A7244F74CE00678726 /* Assets.xcassets */; };
 		5BDAE8AB244F74CE00678726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAE8A9244F74CE00678726 /* LaunchScreen.storyboard */; };
+		5BDAE8B3244F754C00678726 /* AKAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAE8B2244F754C00678726 /* AKAudioRecorder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		5BDAE8A7244F74CE00678726 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5BDAE8AA244F74CE00678726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BDAE8AC244F74CE00678726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5BDAE8B2244F754C00678726 /* AKAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKAudioRecorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				5BDAE8A7244F74CE00678726 /* Assets.xcassets */,
 				5BDAE8A9244F74CE00678726 /* LaunchScreen.storyboard */,
 				5BDAE8AC244F74CE00678726 /* Info.plist */,
+				5BDAE8B2244F754C00678726 /* AKAudioRecorder.swift */,
 			);
 			path = AKAudioRecorder;
 			sourceTree = "<group>";
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BDAE8B3244F754C00678726 /* AKAudioRecorder.swift in Sources */,
 				5BDAE8A3244F74C400678726 /* ViewController.swift in Sources */,
 				5BDAE89F244F74C400678726 /* AppDelegate.swift in Sources */,
 				5BDAE8A1244F74C400678726 /* SceneDelegate.swift in Sources */,
