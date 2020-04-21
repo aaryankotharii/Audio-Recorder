@@ -26,6 +26,12 @@ class AKAudioRecorder {
     
     fileprivate var timer: Timer!
     
+    var isRecording : Bool = false
+    var isPlaying : Bool = false
+    
+    var duration : Double
+
+    
     private func InitialSetup(){
          let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         
@@ -36,9 +42,40 @@ class AKAudioRecorder {
             audioRecorder.isMeteringEnabled = true
             audioRecorder.prepareToRecord()
         } catch let audioError as NSError {
-            print ("Error signing out: %@", audioError)
+            print ("Error setting up: %@", audioError)
         }
     }
+    
+    func record(completion: @escaping (Bool) -> ()){
+        InitialSetup()
+        
+        if let audioRecorder = audioRecorder{
+            if !isRecording {
+                do{
+                    try audioSession.setActive(true)
+                    
+                    duration = 0
+                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
+                    
+                    audioRecorder.record()
+                    isRecording = true
+                    print("recording now")
+                    completion(true)
+                } catch let recordingError as NSError{
+                    print ("Error recording : %@", recordingError.localizedDescription)
+                    completion(false)
+            }
+        }
+    }
+}
+
+    
+    @objc private func updateDuration() {
+        if isRecording && !isPlaying{
+            duration += 0.1
+        //timeLabel.text = duration.timeStringFormatter
+        }
+       }
     
     func getDocumentsDirectory() -> URL {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
