@@ -29,7 +29,7 @@ class AKAudioRecorder {
     var isRecording : Bool = false
     var isPlaying : Bool = false
     
-    var duration : Double
+    var duration = Double()
 
     
     private func InitialSetup(){
@@ -69,17 +69,38 @@ class AKAudioRecorder {
     }
 }
     
-    func stop(completion: @escaping (Bool) -> ()){
+    func stop(){
         if audioRecorder != nil{
             audioRecorder.stop()
             audioRecorder = nil
             do {
                   try audioSession.setActive(false)
-                completion(true)
+                isRecording = false
+                print("Recording stopped")
               } catch {
                   print("stop()",error.localizedDescription)
-                completion(false)
               }
+        }
+    }
+    
+    
+    func play(completion: @escaping (Bool) -> ()){
+        if !isRecording && !isPlaying {
+                let path = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+                       print("playing")
+                       do{
+                           audioPlayer = try AVAudioPlayer(contentsOf: path)
+                        audioPlayer.delegate = self as? AVAudioPlayerDelegate
+                           audioPlayer.play()
+                        print("Recording stopped")
+
+                        completion(true)
+                       }catch{
+                           print(error.localizedDescription)
+                       }
+        }else{
+            completion(false)
+            return
         }
     }
 
