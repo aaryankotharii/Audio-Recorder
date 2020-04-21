@@ -15,7 +15,7 @@ class AKAudioRecorder {
     static let shared = AKAudioRecorder()
     
     //MARK:- Variables
-    private var recordingSession : AVAudioSession = AVAudioSession.sharedInstance()
+    private var audioSession : AVAudioSession = AVAudioSession.sharedInstance()
     private var audioRecorder : AVAudioRecorder!
     private var audioPlayer : AVAudioPlayer = AVAudioPlayer()
     
@@ -27,6 +27,21 @@ class AKAudioRecorder {
     fileprivate var timer: Timer!
     
     private func InitialSetup(){
+         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
         
+        do{
+            try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.delegate = self as? AVAudioRecorderDelegate
+            audioRecorder.isMeteringEnabled = true
+            audioRecorder.prepareToRecord()
+        } catch let audioError as NSError {
+            print ("Error signing out: %@", audioError)
+        }
     }
+    
+    func getDocumentsDirectory() -> URL {
+         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+         return paths[0]
+     }
 }
