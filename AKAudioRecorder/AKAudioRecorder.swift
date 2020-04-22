@@ -10,7 +10,7 @@ import Foundation
 import AVFoundation
 
 
-class AKAudioRecorder {
+class AKAudioRecorder: NSObject {
     
     static let shared = AKAudioRecorder()
     
@@ -28,13 +28,18 @@ class AKAudioRecorder {
     
     var isRecording : Bool = false
     var isPlaying : Bool = false
-    
     var duration = CGFloat()
-
+    var recordingName : String?
+    var numberOfLoops : Int?
+    
+    private var myRecordings = [String]()
+    
+    private var fileName : String?
     
     private func InitialSetup(){
-         let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
-        
+        fileName = NSUUID().uuidString
+        let audioFilename = getDocumentsDirectory().appendingPathComponent((recordingName?.appending(".m4a") ?? fileName!.appending(".m4a")))
+        myRecordings.append(recordingName ?? fileName!)
         do{
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -48,7 +53,6 @@ class AKAudioRecorder {
     
     func record(completion: @escaping (Bool) -> ()){
         InitialSetup()
-        
         if let audioRecorder = audioRecorder{
             if !isRecording {
                 do{
@@ -56,7 +60,6 @@ class AKAudioRecorder {
                     
                     duration = 0
                     self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
-                    
                     audioRecorder.record()
                     isRecording = true
                     print("recording now")
@@ -69,39 +72,77 @@ class AKAudioRecorder {
     }
 }
     
-    func stop(){
+    func stopRecording(completion: (() -> Void)? = nil){
         if audioRecorder != nil{
             audioRecorder.stop()
             audioRecorder = nil
             do {
-                  try audioSession.setActive(false)
+                try audioSession.setActive(false)
                 isRecording = false
                 print("Recording stopped")
-              } catch {
-                  print("stop()",error.localizedDescription)
-              }
+                } catch {
+                print("stop()",error.localizedDescription)
+            }
         }
     }
     
     
     func play(completion: @escaping (Bool) -> ()){
         if !isRecording && !isPlaying {
-                let path = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+            if let fileName = fileName {
+             let path = getDocumentsDirectory().appendingPathComponent(fileName+".m4a")
                        print("playing")
                        do{
-                           audioPlayer = try AVAudioPlayer(contentsOf: path)
+                        audioPlayer = try AVAudioPlayer(contentsOf: path)
                         audioPlayer.delegate = self as? AVAudioPlayerDelegate
-                           audioPlayer.play()
+                        audioPlayer.numberOfLoops = numberOfLoops ?? 0
+                        audioPlayer.play()
                         print("Recording stopped")
 
                         completion(true)
                        }catch{
                            print(error.localizedDescription)
-                       }
+                        }}else{
+                        completion(false)
+                        print("no file exists")
+            }
         }else{
             completion(false)
             return
         }
+    }
+    
+    func play(name:String) {
+        
+        let fileName = name + ".m4a"
+        
+        let path = getDocumentsDirectory().appendingPathComponent(fileName)
+        
+        if FileManager.default.fileExists(atPath: path.path) && !isRecording && !isPlaying {
+            
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: path)
+                audioPlayer.delegate = self as? AVAudioPlayerDelegate
+                audioPlayer.play()
+            } catch {
+                print("play(with name:), ",error.localizedDescription)
+            }
+        } else {
+            return
+            print("File Does not Exist")
+        }
+    }
+    
+    func stopPlaying(){
+        audioPlayer.stop()
+        isPlaying = false
+    }
+    
+    func restartPlayer(){
+        audioPlayer.stop()
+        audioPlayer.currentTime = 0
+        audioPlayer.play()
+        isPlaying = true
     }
     
     func getTime() -> String {
@@ -122,6 +163,35 @@ class AKAudioRecorder {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
          return paths[0]
      }
+}
+
+
+extension AKAudioRecorder : AVAudioRecorderDelegate{
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        isRecording = false
+        timer.invalidate()
+        
+        switch flag {
+        case true:
+                print("record finish")
+        case false:
+            print("record erorr")
+        }
+            }
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        print(error?.localizedDescription ?? "Error occured while encoding recorder")
+    }
+}
+
+extension AKAudioRecorder: AVAudioPlayerDelegate{
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+                isPlaying = false
+        print("playing finish")
+    }
+    
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+         print(error?.localizedDescription ?? "Error occured while encoding player")
+    }
 }
 
 extension CGFloat{

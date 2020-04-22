@@ -9,6 +9,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    var recorder = AKAudioRecorder.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +19,7 @@ class ViewController: UIViewController {
 
 
     @IBAction func record(_ sender: Any) {
-        AKAudioRecorder.shared.record { (success) in
+       recorder.record { (success) in
             if success {
                 print("success")
             }
@@ -25,15 +27,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func stop(_ sender: Any) {
-        AKAudioRecorder.shared.stop()
+        recorder.stopRecording()
     }
+    
     @IBAction func play(_ sender: Any) {
-        AKAudioRecorder.shared.play { (success) in
+        recorder.play { (success) in
             if success {
                 print("success")
             }
         }
-        
     }
+    
 }
 
