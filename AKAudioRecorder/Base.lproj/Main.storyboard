@@ -60,29 +60,45 @@
                                 <rect key="frame" x="0.0" y="230" width="414" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" textLabel="ady-m0-NXP" detailTextLabel="OvJ-dr-nf1" rowHeight="88" style="IBUITableViewCellStyleSubtitle" id="vXs-4d-ior">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="88" id="vXs-4d-ior" customClass="recordingTableViewCell" customModule="AKAudioRecorder" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vXs-4d-ior" id="yPE-Z5-Gp9">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ady-m0-NXP">
-                                                    <rect key="frame" x="20" y="24" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DLL-Ai-2C5">
+                                                    <rect key="frame" x="38" y="29" width="338" height="31"/>
+                                                    <color key="minimumTrackTintColor" red="0.89411764705882346" green="0.89803921568627454" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="maximumTrackTintColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D0CE2842-2C42-45B8-A1DD-2A1E016D105A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOI-rA-EpR">
+                                                    <rect key="frame" x="10" y="72" width="203" height="11"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OvJ-dr-nf1">
-                                                    <rect key="frame" x="20" y="47.5" width="33" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="my recording" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZ2-c7-iQv">
+                                                    <rect key="frame" x="10" y="10" width="100" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sOI-rA-EpR" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="10" id="2ft-Me-JMQ"/>
+                                                <constraint firstItem="nZ2-c7-iQv" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="10" id="4v8-LI-O0K"/>
+                                                <constraint firstItem="DLL-Ai-2C5" firstAttribute="centerY" secondItem="yPE-Z5-Gp9" secondAttribute="centerY" id="GEP-MA-SDe"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="DLL-Ai-2C5" secondAttribute="trailing" constant="20" id="Gvi-Tp-52C"/>
+                                                <constraint firstItem="DLL-Ai-2C5" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leadingMargin" constant="20" id="NuR-JI-YJM"/>
+                                                <constraint firstItem="nZ2-c7-iQv" firstAttribute="top" secondItem="yPE-Z5-Gp9" secondAttribute="top" constant="10" id="QnD-Ev-UI4"/>
+                                                <constraint firstItem="sOI-rA-EpR" firstAttribute="top" secondItem="DLL-Ai-2C5" secondAttribute="bottom" constant="13" id="z9D-B9-7Mp"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="fileName" destination="sOI-rA-EpR" id="xMo-3N-tTo"/>
+                                            <outlet property="recordingName" destination="nZ2-c7-iQv" id="1I5-c8-cGJ"/>
+                                            <outlet property="slider" destination="DLL-Ai-2C5" id="YaO-xz-5Y6"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>

@@ -74,9 +74,9 @@ class AKAudioRecorder: NSObject {
                     try audioSession.setActive(true)
                     
                     duration = 0
-                    self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
-                    audioRecorder.record()
                     isRecording = true
+                    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
+                    audioRecorder.record()
                     print("recording now")
                 } catch let recordingError as NSError{
                     print ("Error recording : %@", recordingError.localizedDescription)
@@ -112,7 +112,8 @@ class AKAudioRecorder: NSObject {
                         audioPlayer.delegate = self
                         audioPlayer.numberOfLoops = numberOfLoops ?? 0
                         audioPlayer.play()
-                        print("Recording stopped")
+                        isPlaying = true
+                        print("Recording play")
                         completion(true)
                        }catch{
                            print(error.localizedDescription)
@@ -138,6 +139,7 @@ class AKAudioRecorder: NSObject {
                 audioPlayer = try AVAudioPlayer(contentsOf: path)
                 audioPlayer.delegate = self
                 audioPlayer.play()
+                isPlaying = true
             } catch {
                 print("play(with name:), ",error.localizedDescription)
             }
@@ -184,7 +186,12 @@ class AKAudioRecorder: NSObject {
     }
     
     func getTime() -> String {
+        print(duration.timeStringFormatter)
         return duration.timeStringFormatter
+    }
+    
+    func getCurrentTime() -> Double {
+        return audioPlayer.currentTime
     }
     
     private func checkRepeat(name: String) -> Bool{
@@ -197,7 +204,6 @@ class AKAudioRecorder: NSObject {
             while count != 1{
                 let index = myRecordings.firstIndex(of: name)
                 myRecordings.remove(at: index!)
-                print(index,"index")
                 count -= 1
             }
             return false
@@ -210,8 +216,8 @@ class AKAudioRecorder: NSObject {
     
     @objc private func updateDuration() {
         if isRecording && !isPlaying{
-            duration += 0.1
-        //timeLabel.text = duration.timeStringFormatter
+            duration += 1
+            print(duration.timeStringFormatter)
         }else{
             timer.invalidate()
         }
