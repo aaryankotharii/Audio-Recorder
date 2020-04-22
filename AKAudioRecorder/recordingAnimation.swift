@@ -30,7 +30,24 @@ extension ExampleViewController{
        self.playButton.transform = CGAffineTransform(scaleX: 2, y: 2)
         self.playButton.layer.cornerRadius = 15
     }
+    
+    func setTimer(){
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateDuration), userInfo: nil, repeats: true)
+    }
+
+    @objc func updateDuration() {
+        if recorder.isRecording && !recorder.isPlaying{
+            duration += 1
+            self.timeLabel.alpha = 1
+            self.timeLabel.text = duration.timeStringFormatter
+        }else{
+            timer.invalidate()
+            self.timeLabel.alpha = 0
+            self.timeLabel.text = "0:00"
+        }
+    }
 }
+
 extension UIView {
 
 @IBInspectable
@@ -72,12 +89,13 @@ var borderColor: UIColor? {
 }
 
 extension UIViewController {
-    
+    // Function for tap gesture
     func hideKeyboardWhenTappedAround() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }
+    // Calling dismiss selector actions
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }

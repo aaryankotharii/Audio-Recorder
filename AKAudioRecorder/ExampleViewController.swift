@@ -12,16 +12,18 @@ class ExampleViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var playButton: UIButton!
+    @IBOutlet var timeLabel: UILabel!
     
     var recorder = AKAudioRecorder.shared
     var displayLink = CADisplayLink()
+    var duration : CGFloat = 0.0
+    var timer : Timer!
     
     override func viewDidLoad() {
         tableView.dataSource = self
         tableView.delegate = self
         super.viewDidLoad()
         setCircle()
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func playstopButton(_ sender: UIButton) {
@@ -33,10 +35,12 @@ class ExampleViewController: UIViewController {
         } else{
             animate(isRecording: false)
             recorder.record()
+            setTimer()
             print(recorder.getTime())
         }
     }
 }
+
 extension ExampleViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recorder.getRecordings.count
@@ -46,10 +50,9 @@ extension ExampleViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! recordingTableViewCell
          
         let recording = recorder.getRecordings[indexPath.row]
-        
-        cell.recordingName.text = "New Recording" + String(indexPath.row + 1)
+        let name = "New Recording " + String(indexPath.row + 1)
+        cell.recordingName.text = name
         cell.fileName.text = String(recording)
-        
         return cell
     }
     

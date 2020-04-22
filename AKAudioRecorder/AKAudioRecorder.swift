@@ -214,14 +214,13 @@ class AKAudioRecorder: NSObject {
     }
 
     
-    @objc private func updateDuration() {
+    @objc func updateDuration() {
         if isRecording && !isPlaying{
             duration += 1
-            print(duration.timeStringFormatter)
         }else{
             timer.invalidate()
         }
-       }
+        }
     
     func getDocumentsDirectory() -> URL {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)

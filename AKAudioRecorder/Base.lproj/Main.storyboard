@@ -148,17 +148,25 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-UD-3tv">
+                                <rect key="frame" x="298" y="165" width="80" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="trailing" secondItem="YVv-uF-vIr" secondAttribute="trailing" id="04H-ZG-dWb"/>
                             <constraint firstAttribute="bottom" secondItem="2ts-y3-Wk4" secondAttribute="bottom" id="42W-QL-bVQ"/>
+                            <constraint firstItem="OGe-UD-3tv" firstAttribute="centerY" secondItem="a2y-qg-rKo" secondAttribute="centerY" id="McW-R9-zcN"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="trailing" secondItem="YVv-uF-vIr" secondAttribute="trailing" id="NG6-ci-WyX"/>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" id="Yq3-XF-gaQ"/>
                             <constraint firstItem="85r-DO-aZ1" firstAttribute="centerX" secondItem="dc8-ti-B4o" secondAttribute="centerX" id="bfH-EC-Lxz"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="top" secondItem="YVv-uF-vIr" secondAttribute="top" id="eWD-XB-QVu"/>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="85r-DO-aZ1" secondAttribute="bottom" constant="11" id="fxz-qx-Kcf"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" id="g7A-nG-kcQ"/>
+                            <constraint firstItem="YVv-uF-vIr" firstAttribute="trailing" secondItem="OGe-UD-3tv" secondAttribute="trailing" constant="36" id="xEq-4s-SUH"/>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="mjL-xg-rOu" secondAttribute="bottom" constant="90" id="zyc-WO-I9g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YVv-uF-vIr"/>
@@ -166,6 +174,7 @@
                     <connections>
                         <outlet property="playButton" destination="a2y-qg-rKo" id="xsV-mD-RLe"/>
                         <outlet property="tableView" destination="2ts-y3-Wk4" id="RHZ-CY-Ozz"/>
+                        <outlet property="timeLabel" destination="OGe-UD-3tv" id="rj1-0V-uG8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIr-tO-ziY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
