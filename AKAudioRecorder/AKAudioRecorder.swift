@@ -152,6 +152,30 @@ class AKAudioRecorder: NSObject {
         isPlaying = false
     }
     
+    func deleteRecording(name: String){
+        let path = getDocumentsDirectory().appendingPathComponent(name.appending(".m4a"))
+        let manager = FileManager.default
+        
+        if manager.fileExists(atPath: path.path) {
+            
+            do {
+                try manager.removeItem(at: path)
+                removeRecordingFromArray(name: name)
+            } catch {
+                print("delete()",error.localizedDescription)
+            }
+        } else {
+            print("File is not exist.")
+        }
+    }
+    
+    private func removeRecordingFromArray(name: String){
+        if myRecordings.contains(name){
+            let index = myRecordings.firstIndex(of: name)
+            myRecordings.remove(at: index!)
+        }
+    }
+    
     func restartPlayer(){
         audioPlayer.stop()
         audioPlayer.currentTime = 0
@@ -177,6 +201,7 @@ class AKAudioRecorder: NSObject {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
          return paths[0]
      }
+    
 }
 
 
@@ -218,5 +243,11 @@ extension CGFloat{
         if minutes < 60 {    format = "%01i:%02i"   }
         else {    format = "%01i:%02i"    }
         return String(format: format!, minutes, seconds)
+    }
+}
+
+extension AKAudioRecorder{
+    var getRecordings : [String]{
+        return self.myRecordings
     }
 }

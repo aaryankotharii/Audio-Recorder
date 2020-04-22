@@ -19,14 +19,17 @@ class ViewController: UIViewController {
 
 
     @IBAction func record(_ sender: Any) {
-       recorder.record { (success) in
-            if success {
-                print("success")
+        recorder.record { (success) in
+            if success{
+                
+            }else{
+                
             }
         }
     }
     
     @IBAction func stop(_ sender: Any) {
+        print(recorder.getRecordings)
         recorder.stopRecording()
     }
     
