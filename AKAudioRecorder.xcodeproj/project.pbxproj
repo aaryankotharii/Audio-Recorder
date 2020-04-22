@@ -14,6 +14,7 @@
 		5BDAE8A8244F74CE00678726 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAE8A7244F74CE00678726 /* Assets.xcassets */; };
 		5BDAE8AB244F74CE00678726 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5BDAE8A9244F74CE00678726 /* LaunchScreen.storyboard */; };
 		5BDAE8B3244F754C00678726 /* AKAudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAE8B2244F754C00678726 /* AKAudioRecorder.swift */; };
+		5BDAE8B52450463F00678726 /* ExampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BDAE8B42450463F00678726 /* ExampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		5BDAE8AA244F74CE00678726 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BDAE8AC244F74CE00678726 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5BDAE8B2244F754C00678726 /* AKAudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AKAudioRecorder.swift; sourceTree = "<group>"; };
+		5BDAE8B42450463F00678726 /* ExampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +44,7 @@
 		5BDAE892244F74C400678726 = {
 			isa = PBXGroup;
 			children = (
+				5BDAE8B42450463F00678726 /* ExampleViewController.swift */,
 				5BDAE89D244F74C400678726 /* AKAudioRecorder */,
 				5BDAE89C244F74C400678726 /* Products */,
 			);
@@ -145,6 +148,7 @@
 				5BDAE8A3244F74C400678726 /* ViewController.swift in Sources */,
 				5BDAE89F244F74C400678726 /* AppDelegate.swift in Sources */,
 				5BDAE8A1244F74C400678726 /* SceneDelegate.swift in Sources */,
+				5BDAE8B52450463F00678726 /* ExampleViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
