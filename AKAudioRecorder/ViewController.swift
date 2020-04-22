@@ -19,6 +19,7 @@ class ViewController: UIViewController {
 
 
     @IBAction func record(_ sender: Any) {
+        recorder.recordingName = "AK"
         recorder.record { (success) in
             if success{
                 
@@ -35,11 +36,7 @@ class ViewController: UIViewController {
     
     @IBAction func play(_ sender: Any) {
         recorder.rate = 3.0
-        recorder.play { (success) in
-            if success {
-                print("success")
-            }
+        recorder.play(name: "AK")
         }
-    }
 }
 

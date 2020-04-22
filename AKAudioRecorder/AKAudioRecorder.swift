@@ -53,6 +53,7 @@ class AKAudioRecorder: NSObject {
         fileName = NSUUID().uuidString
         let audioFilename = getDocumentsDirectory().appendingPathComponent((recordingName?.appending(".m4a") ?? fileName!.appending(".m4a")))
         myRecordings.append(recordingName ?? fileName!)
+        if !checkRepeat(name: recordingName ?? fileName!) { print("Same name reused, recording will be overwritten")}
         do{
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
@@ -185,6 +186,26 @@ class AKAudioRecorder: NSObject {
     
     func getTime() -> String {
         return duration.timeStringFormatter
+    }
+    
+    private func checkRepeat(name: String) -> Bool{
+        print("name is",name)
+        var count = 0
+        if myRecordings.contains(name){
+            print("executed")
+            count = myRecordings.filter{$0 == name}.count
+        if count > 1{
+            while count != 1{
+                let index = myRecordings.firstIndex(of: name)
+                myRecordings.remove(at: index!)
+                print(index,"index")
+                count -= 1
+            }
+            return false
+        }
+        }
+        print("true")
+        return true
     }
 
     
