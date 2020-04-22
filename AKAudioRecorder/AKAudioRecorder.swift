@@ -60,12 +60,13 @@ class AKAudioRecorder: NSObject {
             audioRecorder.delegate = self
             audioRecorder.isMeteringEnabled = true
             audioRecorder.prepareToRecord()
+            audioPlayer.stop()
         } catch let audioError as NSError {
             print ("Error setting up: %@", audioError)
         }
     }
     
-    func record(completion: @escaping (Bool) -> ()){
+    func record(){
         InitialSetup()
         if let audioRecorder = audioRecorder{
             if !isRecording {
@@ -77,10 +78,8 @@ class AKAudioRecorder: NSObject {
                     audioRecorder.record()
                     isRecording = true
                     print("recording now")
-                    completion(true)
                 } catch let recordingError as NSError{
                     print ("Error recording : %@", recordingError.localizedDescription)
-                    completion(false)
             }
         }
     }

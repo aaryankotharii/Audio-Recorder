@@ -20,13 +20,7 @@ class ViewController: UIViewController {
 
     @IBAction func record(_ sender: Any) {
         recorder.recordingName = "AK"
-        recorder.record { (success) in
-            if success{
-                
-            }else{
-                
-            }
-        }
+        recorder.record ()
     }
     
     @IBAction func stop(_ sender: Any) {
