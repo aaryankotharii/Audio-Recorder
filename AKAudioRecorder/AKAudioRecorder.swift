@@ -12,6 +12,7 @@ import AVFoundation
 
 class AKAudioRecorder: NSObject {
     
+    //MARK:- Instance
     static let shared = AKAudioRecorder()
     
     //MARK:- Variables
@@ -31,7 +32,18 @@ class AKAudioRecorder: NSObject {
     var duration = CGFloat()
     var recordingName : String?
     var numberOfLoops : Int?
-    var rate : Float?
+    
+    var rate : Float?{
+        didSet{
+            if (rate! < 0.5) {
+                rate = 0.5
+                print("Rate cannot be less than 0.5")
+            } else if (rate! > 2.0) {
+                rate = 2.0
+                print("Rate cannot exceed 2")
+            }
+        }
+    }
     
     private var myRecordings = [String]()
     
@@ -121,7 +133,7 @@ class AKAudioRecorder: NSObject {
         let path = getDocumentsDirectory().appendingPathComponent(fileName)
         
         if FileManager.default.fileExists(atPath: path.path) && !isRecording && !isPlaying {
-            
+            audioPlayer.prepareToPlay()
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: path)
                 audioPlayer.delegate = self
@@ -130,8 +142,8 @@ class AKAudioRecorder: NSObject {
                 print("play(with name:), ",error.localizedDescription)
             }
         } else {
-            return
             print("File Does not Exist")
+            return
         }
     }
     
