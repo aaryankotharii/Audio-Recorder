@@ -31,6 +31,7 @@ class AKAudioRecorder: NSObject {
     var duration = CGFloat()
     var recordingName : String?
     var numberOfLoops : Int?
+    var rate : Float?
     
     private var myRecordings = [String]()
     
@@ -43,7 +44,7 @@ class AKAudioRecorder: NSObject {
         do{
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-            audioRecorder.delegate = self as? AVAudioRecorderDelegate
+            audioRecorder.delegate = self
             audioRecorder.isMeteringEnabled = true
             audioRecorder.prepareToRecord()
         } catch let audioError as NSError {
@@ -94,11 +95,12 @@ class AKAudioRecorder: NSObject {
                        print("playing")
                        do{
                         audioPlayer = try AVAudioPlayer(contentsOf: path)
-                        audioPlayer.delegate = self as? AVAudioPlayerDelegate
+                        (rate == nil) ? (audioPlayer.enableRate = false) : (audioPlayer.enableRate = true)
+                        audioPlayer.rate = rate ?? 1.0
+                        audioPlayer.delegate = self
                         audioPlayer.numberOfLoops = numberOfLoops ?? 0
                         audioPlayer.play()
                         print("Recording stopped")
-
                         completion(true)
                        }catch{
                            print(error.localizedDescription)
@@ -122,7 +124,7 @@ class AKAudioRecorder: NSObject {
             
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: path)
-                audioPlayer.delegate = self as? AVAudioPlayerDelegate
+                audioPlayer.delegate = self
                 audioPlayer.play()
             } catch {
                 print("play(with name:), ",error.localizedDescription)
@@ -179,17 +181,19 @@ extension AKAudioRecorder : AVAudioRecorderDelegate{
         }
             }
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        isRecording = false
         print(error?.localizedDescription ?? "Error occured while encoding recorder")
     }
 }
 
 extension AKAudioRecorder: AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-                isPlaying = false
+        isPlaying = false
         print("playing finish")
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        isPlaying = false
          print(error?.localizedDescription ?? "Error occured while encoding player")
     }
 }
