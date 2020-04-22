@@ -48,10 +48,10 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="121.875"/>
         </scene>
-        <!--View Controller-->
+        <!--Example View Controller-->
         <scene sceneID="xc8-y6-odc">
             <objects>
-                <viewController id="UtS-bg-Dqx" sceneMemberID="viewController">
+                <viewController id="UtS-bg-Dqx" customClass="ExampleViewController" customModule="AKAudioRecorder" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dc8-ti-B4o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -85,6 +85,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YVv-uF-vIr"/>
                     </view>
+                    <connections>
+                        <outlet property="playButton" destination="a2y-qg-rKo" id="xsV-mD-RLe"/>
+                        <outlet property="tableView" destination="2ts-y3-Wk4" id="RHZ-CY-Ozz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CIr-tO-ziY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

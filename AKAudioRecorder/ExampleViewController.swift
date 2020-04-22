@@ -9,7 +9,11 @@
 import UIKit
 
 class ExampleViewController: UIViewController {
-
+    
+    @IBOutlet var tableView: UITableView!
+    
+    @IBOutlet var playButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
