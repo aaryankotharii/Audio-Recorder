@@ -69,8 +69,8 @@ var recorder = AKAudioRecorder.shared
 
 ###### Time ( Get Property ) ⏱
 ```Swift
-       recorder.getCurrentTime() // Time Played of recording
-       recorder.getDuration() // Duration of recordng
+      recorder.getCurrentTime() // Time Played of recording
+      recorder.getDuration() // Duration of recordng
 ```
   
  ###### Number Of Loops ( Set Property ) ♾
