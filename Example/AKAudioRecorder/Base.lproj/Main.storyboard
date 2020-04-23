@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,19 +17,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2ts-y3-Wk4">
-                                <rect key="frame" x="0.0" y="230" width="414" height="666"/>
+                                <rect key="frame" x="10" y="230" width="394" height="656"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="88" id="vXs-4d-ior" customClass="recordingTableViewCell" customModule="AKAudioRecorder" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="88"/>
+                                        <rect key="frame" x="0.0" y="28" width="394" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vXs-4d-ior" id="yPE-Z5-Gp9">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="DLL-Ai-2C5">
-                                                    <rect key="frame" x="38" y="29" width="338" height="31"/>
-                                                    <color key="minimumTrackTintColor" red="0.89411764705882346" green="0.89803921568627454" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <rect key="frame" x="38" y="29" width="318" height="31"/>
+                                                    <color key="minimumTrackTintColor" name="Slider-min"/>
                                                     <color key="maximumTrackTintColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D0CE2842-2C42-45B8-A1DD-2A1E016D105A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOI-rA-EpR">
@@ -39,6 +41,9 @@
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="my recording" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nZ2-c7-iQv">
                                                     <rect key="frame" x="10" y="10" width="100" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="CWc-NQ-wkr"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
@@ -48,6 +53,7 @@
                                                 <constraint firstItem="nZ2-c7-iQv" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="10" id="4v8-LI-O0K"/>
                                                 <constraint firstItem="DLL-Ai-2C5" firstAttribute="centerY" secondItem="yPE-Z5-Gp9" secondAttribute="centerY" id="GEP-MA-SDe"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="DLL-Ai-2C5" secondAttribute="trailing" constant="20" id="Gvi-Tp-52C"/>
+                                                <constraint firstItem="sOI-rA-EpR" firstAttribute="top" secondItem="nZ2-c7-iQv" secondAttribute="bottom" priority="500" constant="20" id="KVS-6K-3df"/>
                                                 <constraint firstItem="DLL-Ai-2C5" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leadingMargin" constant="20" id="NuR-JI-YJM"/>
                                                 <constraint firstItem="nZ2-c7-iQv" firstAttribute="top" secondItem="yPE-Z5-Gp9" secondAttribute="top" constant="10" id="QnD-Ev-UI4"/>
                                                 <constraint firstItem="sOI-rA-EpR" firstAttribute="top" secondItem="DLL-Ai-2C5" secondAttribute="bottom" constant="13" id="z9D-B9-7Mp"/>
@@ -62,7 +68,7 @@
                                 </prototypes>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="30"/>
+                                        <real key="value" value="50"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </tableView>
@@ -82,13 +88,16 @@
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                 <integer key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="playstopButton:" destination="UtS-bg-Dqx" eventType="touchUpInside" id="mT5-kt-xFb"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" name="Background"/>
                                 <constraints>
                                     <constraint firstItem="a2y-qg-rKo" firstAttribute="centerX" secondItem="85r-DO-aZ1" secondAttribute="centerX" id="HPe-UE-tU5"/>
                                     <constraint firstAttribute="height" constant="72" id="Q1O-p6-SLC"/>
@@ -103,24 +112,24 @@
                                         <real key="value" value="2"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="value" name="black-white"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-UD-3tv">
                                 <rect key="frame" x="298" y="165" width="80" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.10980392156862745" green="0.10980392156862745" blue="0.11764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="Background"/>
                         <constraints>
-                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="trailing" secondItem="YVv-uF-vIr" secondAttribute="trailing" id="04H-ZG-dWb"/>
-                            <constraint firstAttribute="bottom" secondItem="2ts-y3-Wk4" secondAttribute="bottom" id="42W-QL-bVQ"/>
+                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="trailing" secondItem="YVv-uF-vIr" secondAttribute="trailing" constant="-10" id="04H-ZG-dWb"/>
+                            <constraint firstAttribute="bottom" secondItem="2ts-y3-Wk4" secondAttribute="bottom" constant="10" id="42W-QL-bVQ"/>
                             <constraint firstItem="OGe-UD-3tv" firstAttribute="centerY" secondItem="a2y-qg-rKo" secondAttribute="centerY" id="McW-R9-zcN"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="trailing" secondItem="YVv-uF-vIr" secondAttribute="trailing" id="NG6-ci-WyX"/>
-                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" id="Yq3-XF-gaQ"/>
+                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" constant="10" id="Yq3-XF-gaQ"/>
                             <constraint firstItem="85r-DO-aZ1" firstAttribute="centerX" secondItem="dc8-ti-B4o" secondAttribute="centerX" id="bfH-EC-Lxz"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="top" secondItem="YVv-uF-vIr" secondAttribute="top" id="eWD-XB-QVu"/>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="85r-DO-aZ1" secondAttribute="bottom" constant="11" id="fxz-qx-Kcf"/>
@@ -141,4 +150,15 @@
             <point key="canvasLocation" x="956.52173913043487" y="121.875"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.67843137254901964" green="0.85098039215686272" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Slider-min">
+            <color red="0.76311448371526514" green="0.89803921568627454" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="black-white">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+    </resources>
 </document>

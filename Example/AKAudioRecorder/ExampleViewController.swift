@@ -22,8 +22,10 @@ class ExampleViewController: UIViewController {
     override func viewDidLoad() {
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset.top = 30
         super.viewDidLoad()
         setCircle()
+        dismissKeyboard()
     }
     
     @IBAction func playstopButton(_ sender: UIButton) {
@@ -50,7 +52,8 @@ extension ExampleViewController: UITableViewDelegate,UITableViewDataSource{
         let recording = recorder.getRecordings[indexPath.row]
         let name = "New Recording " + String(indexPath.row + 1)
         cell.recordingName.text = name
-        cell.fileName.text = String(recording)
+        cell.fileName.text =  "FileName :- \(recording)"
+        cell.slider.isHidden = true
         return cell
     }
     
