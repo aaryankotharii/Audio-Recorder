@@ -44,7 +44,7 @@ Audio Recorder Helper Class 🎙
       recorder.deleteRecording(name: "mySong")
 ```
 
-## Miscellaneous
+## Miscellaneous 🤷🏻‍♂️
 
  ###### Set recording Name ( Set Property )
  ```Swift
@@ -55,13 +55,13 @@ Audio Recorder Helper Class 🎙
      recorder.play(name: "myRecording123")
 ```
 
-###### Time ( Get Property )
+###### Time ( Get Property ) ⏱
 ```Swift
      recorder.getCurrentTime() // Time Played of recording
      recorder.getDuration() // Duration of recordng
 ```
   
- ###### Number Of Loops ( Set Property )
+ ###### Number Of Loops ( Set Property ) ♾
  ```Swift
      recorder.numberOfLoops // set Interger to repeat recording. 
      Default value = 0
@@ -70,7 +70,7 @@ Audio Recorder Helper Class 🎙
      recorder.play()
 ```
 
- ###### Rate of Playback ( Set Property )
+ ###### Rate of Playback ( Set Property ) ⏭
  ```Swift
      recorder.rate // set Float to change rate of recording.
      Default value = 1
@@ -80,7 +80,7 @@ Audio Recorder Helper Class 🎙
      recorder.play()
 ```
 
- ###### Your Saved Recordings ( Get Property )
+ ###### Your Saved Recordings ( Get Property ) 🔰
  ```Swift
      recorder.getRecordings // [String]
      will return an array of locations || name of recordings.
