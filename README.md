@@ -1,13 +1,24 @@
 # Audio-Recorder
-Audio Recorder Helper Class 🎙
+> Audio Recorder Helper Class in swift 🎙
+> includes record, Play, stop, delete etc 🎙
+> includes computed properties and completion handlers🎙
 
-### Implementation
+## Implementation
 
 ```Swift
-      var recorder = AKAudioRecorder.shared
+var recorder = AKAudioRecorder.shared
 ```
 
-### Before You Use ⚠️
+ ## Screenshots
+ > "of Example Project"
+ <p float="left">
+ <img src ="Example/Assets/demo.gif" width = "210" />
+ <img src ="Example/Assets/1.PNG" width = "210" /> 
+ <img src ="Example/Assets/3.PNG" width = "210" />      
+ <img src ="Example/Assets/2.PNG" width = "210" />
+ </p>
+ 
+ ### Before You Use ⚠️
 
 ```Swift
       Upadte your info.plist to access microphone
