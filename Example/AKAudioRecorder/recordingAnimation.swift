@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+//MARK:- Extra Functions for UI Improvement
+
 extension ExampleViewController{
     func animate(isRecording : Bool){
         if isRecording{
@@ -42,12 +44,15 @@ extension ExampleViewController{
             self.timeLabel.text = duration.timeStringFormatter
         }else{
             timer.invalidate()
+            duration = 0
             self.timeLabel.alpha = 0
             self.timeLabel.text = "0:00"
         }
     }
 }
 
+
+//MARK:- Adding Attributes to UIView
 extension UIView {
 
 @IBInspectable
@@ -88,6 +93,7 @@ var borderColor: UIColor? {
 }
 }
 
+//MARK:- Hide keyboard when tapped
 extension UIViewController {
     // Function for tap gesture
     func hideKeyboardWhenTappedAround() {

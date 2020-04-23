@@ -9,13 +9,12 @@
 import Foundation
 import AVFoundation
 
-
 class AKAudioRecorder: NSObject {
     
     //MARK:- Instance
     static let shared = AKAudioRecorder()
     
-    //MARK:- Variables
+    //MARK:- Variables ( Private )
     private var audioSession : AVAudioSession = AVAudioSession.sharedInstance()
     private var audioRecorder : AVAudioRecorder!
     private var audioPlayer : AVAudioPlayer = AVAudioPlayer()
@@ -26,13 +25,20 @@ class AKAudioRecorder: NSObject {
                                 AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue ]
     
     fileprivate var timer: Timer!
+    private var myRecordings = [String]()
+    private var fileName : String?
     
+    
+    //MARK:- Public Variables
+    /// Can be changed by user
     var isRecording : Bool = false
     var isPlaying : Bool = false
     var duration = CGFloat()
     var recordingName : String?
     var numberOfLoops : Int?
     
+    
+    //MARK:- Set Rate Limits
     var rate : Float?{
         didSet{
             if (rate! < 0.5) {
@@ -45,16 +51,15 @@ class AKAudioRecorder: NSObject {
         }
     }
     
-    private var myRecordings = [String]()
-    
-    private var fileName : String?
-    
+
+    //MARK:- Pre - Recording Setup
     private func InitialSetup(){
-        fileName = NSUUID().uuidString
+        fileName = NSUUID().uuidString   ///  unique string value
         let audioFilename = getDocumentsDirectory().appendingPathComponent((recordingName?.appending(".m4a") ?? fileName!.appending(".m4a")))
         myRecordings.append(recordingName ?? fileName!)
         if !checkRepeat(name: recordingName ?? fileName!) { print("Same name reused, recording will be overwritten")}
-        do{
+        
+        do{ /// Setup audio player
             try audioSession.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
             audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
             audioRecorder.delegate = self
@@ -66,17 +71,18 @@ class AKAudioRecorder: NSObject {
         }
     }
     
+    
+    //MARK:- Record
     func record(){
         InitialSetup()
         if let audioRecorder = audioRecorder{
             if !isRecording {
                 do{
                     try audioSession.setActive(true)
-                    
                     duration = 0
                     isRecording = true
-                    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
-                    audioRecorder.record()
+                    self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true) /// start  timer
+                    audioRecorder.record() /// start recording
                     debugLog("Recording")
                 } catch let recordingError as NSError{
                     print ("Error recording : %@", recordingError.localizedDescription)
@@ -85,9 +91,11 @@ class AKAudioRecorder: NSObject {
     }
 }
     
+    
+    //MARK:- Stop Recording
     func stopRecording(completion: (() -> Void)? = nil){
         if audioRecorder != nil{
-            audioRecorder.stop()
+            audioRecorder.stop() /// stop recording
             audioRecorder = nil
             do {
                 try audioSession.setActive(false)
@@ -100,6 +108,7 @@ class AKAudioRecorder: NSObject {
     }
     
     
+    //MARK:- Play recording
     func play(completion: @escaping (Bool) -> ()){
         if !isRecording && !isPlaying {
             if let fileName = fileName {
@@ -107,10 +116,10 @@ class AKAudioRecorder: NSObject {
                        do{
                         audioPlayer = try AVAudioPlayer(contentsOf: path)
                         (rate == nil) ? (audioPlayer.enableRate = false) : (audioPlayer.enableRate = true)
-                        audioPlayer.rate = rate ?? 1.0
+                        audioPlayer.rate = rate ?? 1.0   /// set rate
                         audioPlayer.delegate = self
-                        audioPlayer.numberOfLoops = numberOfLoops ?? 0
-                        audioPlayer.play()
+                        audioPlayer.numberOfLoops = numberOfLoops ?? 0   /// set numberofloops
+                        audioPlayer.play()   /// play
                         isPlaying = true
                         debugLog("Playing")
                         completion(true)
@@ -126,6 +135,8 @@ class AKAudioRecorder: NSObject {
         }
     }
     
+    
+    //MARK:- Play by name
     func play(name:String) {
         
         let fileName = name + ".m4a"
@@ -137,7 +148,7 @@ class AKAudioRecorder: NSObject {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: path)
                 audioPlayer.delegate = self
-                audioPlayer.play()
+                audioPlayer.play()  /// play
                 isPlaying = true
                 debugLog("Playing")
             } catch {
@@ -149,12 +160,16 @@ class AKAudioRecorder: NSObject {
         }
     }
     
+    
+    //MARK:- Stop Playing
     func stopPlaying(){
-        audioPlayer.stop()
+        audioPlayer.stop()   ///stop
         isPlaying = false
         debugLog("Stopped playing")
     }
     
+    
+    //MARK:- Delete Recording
     func deleteRecording(name: String){
         let path = getDocumentsDirectory().appendingPathComponent(name.appending(".m4a"))
         let manager = FileManager.default
@@ -173,6 +188,8 @@ class AKAudioRecorder: NSObject {
         }
     }
     
+    
+    //MARK:- remove recroding name instance
     private func removeRecordingFromArray(name: String){
         if myRecordings.contains(name){
             let index = myRecordings.firstIndex(of: name)
@@ -180,6 +197,8 @@ class AKAudioRecorder: NSObject {
         }
     }
     
+    
+    //MARK:- Restart
     func restartPlayer(){
         audioPlayer.stop()
         audioPlayer.currentTime = 0
@@ -187,14 +206,20 @@ class AKAudioRecorder: NSObject {
         isPlaying = true
     }
     
+    
+    //MARK:- Get duration of recording
     func getDuration() -> String {
         return duration.timeStringFormatter
     }
     
+    
+    //MARK:- Live time
     func getCurrentTime() -> Double {
         return audioPlayer.currentTime
     }
     
+    
+    //MARK:- Check for overwritten files
     private func checkRepeat(name: String) -> Bool{
         var count = 0
         if myRecordings.contains(name){
@@ -212,6 +237,7 @@ class AKAudioRecorder: NSObject {
     }
 
     
+    //MARK:- Track time
     @objc func updateDuration() {
         if isRecording && !isPlaying{
             duration += 1
@@ -220,6 +246,7 @@ class AKAudioRecorder: NSObject {
         }
         }
     
+    //MARK:- Get path
     func getDocumentsDirectory() -> URL {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
          return paths[0]
@@ -227,6 +254,7 @@ class AKAudioRecorder: NSObject {
 }
 
 
+//MARK:- AVAudioRecorder Delegate functions
 extension AKAudioRecorder : AVAudioRecorderDelegate{
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         isRecording = false
@@ -245,6 +273,8 @@ extension AKAudioRecorder : AVAudioRecorderDelegate{
     }
 }
 
+
+//MARK:- AVAudioPlayer Delegate functions
 extension AKAudioRecorder: AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isPlaying = false
@@ -257,6 +287,8 @@ extension AKAudioRecorder: AVAudioPlayerDelegate{
     }
 }
 
+
+//MARK:- Convert Time to String
 extension CGFloat{
     var timeStringFormatter : String {
         let format : String?
@@ -268,16 +300,20 @@ extension CGFloat{
     }
 }
 
+
+//MARK:- Computed property to get list of recordings
 extension AKAudioRecorder{
     var getRecordings : [String]{
         return self.myRecordings
     }
 }
 
+
+//MARK:- Easy debugging
 public func debugLog(_ message: String) {
     #if DEBUG
-    debugPrint("=======================================")
+    debugPrint("=================================================")
     debugPrint(message)
-    debugPrint("=======================================")
+    debugPrint("=================================================")
     #endif
 }
