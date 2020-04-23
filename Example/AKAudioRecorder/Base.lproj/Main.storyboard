@@ -34,7 +34,7 @@
                                                     <color key="maximumTrackTintColor" red="0.1764705882352941" green="0.1803921568627451" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </slider>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="D0CE2842-2C42-45B8-A1DD-2A1E016D105A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sOI-rA-EpR">
-                                                    <rect key="frame" x="10" y="72" width="203" height="11"/>
+                                                    <rect key="frame" x="12" y="72" width="203" height="11"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -49,7 +49,7 @@
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="sOI-rA-EpR" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="10" id="2ft-Me-JMQ"/>
+                                                <constraint firstItem="sOI-rA-EpR" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="12" id="2ft-Me-JMQ"/>
                                                 <constraint firstItem="nZ2-c7-iQv" firstAttribute="leading" secondItem="yPE-Z5-Gp9" secondAttribute="leading" constant="10" id="4v8-LI-O0K"/>
                                                 <constraint firstItem="DLL-Ai-2C5" firstAttribute="centerY" secondItem="yPE-Z5-Gp9" secondAttribute="centerY" id="GEP-MA-SDe"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="DLL-Ai-2C5" secondAttribute="trailing" constant="20" id="Gvi-Tp-52C"/>
@@ -79,7 +79,7 @@
                                 </items>
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85r-DO-aZ1">
-                                <rect key="frame" x="171" y="147" width="72" height="72"/>
+                                <rect key="frame" x="171" y="148" width="72" height="72"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2y-qg-rKo">
                                         <rect key="frame" x="21" y="21" width="30" height="30"/>
@@ -98,6 +98,7 @@
                                 <constraints>
                                     <constraint firstItem="a2y-qg-rKo" firstAttribute="centerX" secondItem="85r-DO-aZ1" secondAttribute="centerX" id="HPe-UE-tU5"/>
                                     <constraint firstAttribute="height" constant="72" id="Q1O-p6-SLC"/>
+                                    <constraint firstAttribute="width" secondItem="85r-DO-aZ1" secondAttribute="height" multiplier="1:1" id="XpK-xx-Rp3"/>
                                     <constraint firstAttribute="width" constant="72" id="fA6-2Y-Jya"/>
                                     <constraint firstItem="a2y-qg-rKo" firstAttribute="centerY" secondItem="85r-DO-aZ1" secondAttribute="centerY" id="lBe-t1-WlO"/>
                                 </constraints>
@@ -113,8 +114,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-UD-3tv">
-                                <rect key="frame" x="298" y="165" width="80" height="36"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.10000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OGe-UD-3tv">
+                                <rect key="frame" x="298" y="166" width="80" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="30"/>
                                 <color key="textColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <nil key="highlightedColor"/>
@@ -129,7 +130,7 @@
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" constant="10" id="Yq3-XF-gaQ"/>
                             <constraint firstItem="85r-DO-aZ1" firstAttribute="centerX" secondItem="dc8-ti-B4o" secondAttribute="centerX" id="bfH-EC-Lxz"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="top" secondItem="YVv-uF-vIr" secondAttribute="top" id="eWD-XB-QVu"/>
-                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="85r-DO-aZ1" secondAttribute="bottom" constant="11" id="fxz-qx-Kcf"/>
+                            <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="85r-DO-aZ1" secondAttribute="bottom" constant="10" id="fxz-qx-Kcf"/>
                             <constraint firstItem="mjL-xg-rOu" firstAttribute="leading" secondItem="YVv-uF-vIr" secondAttribute="leading" id="g7A-nG-kcQ"/>
                             <constraint firstItem="YVv-uF-vIr" firstAttribute="trailing" secondItem="OGe-UD-3tv" secondAttribute="trailing" constant="36" id="xEq-4s-SUH"/>
                             <constraint firstItem="2ts-y3-Wk4" firstAttribute="top" secondItem="mjL-xg-rOu" secondAttribute="bottom" constant="90" id="zyc-WO-I9g"/>
@@ -149,10 +150,10 @@
     </scenes>
     <resources>
         <namedColor name="Background">
-            <color red="0.67843137254901964" green="0.85098039215686272" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.67799997329711914" green="0.85100001096725464" blue="0.87800002098083496" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Slider-min">
-            <color red="0.76311448371526514" green="0.89803921568627454" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7630000114440918" green="0.89800000190734863" blue="0.91399997472763062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="black-white">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
