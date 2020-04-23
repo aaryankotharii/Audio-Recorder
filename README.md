@@ -17,7 +17,6 @@ var recorder = AKAudioRecorder.shared
  <img src ="Example/Assets/demo.gif" width = "215"  />
  <img src ="Example/Assets/1.PNG" width = "215"  /> 
  <img src ="Example/Assets/3.PNG" width = "215"  />      
- <img src ="Example/Assets/2.PNG" width = "215"  />
  </p>
  
  ### Before You Use ⚠️
