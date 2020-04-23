@@ -30,7 +30,6 @@ class recordingTableViewCell: UITableViewCell {
     }
     @objc func updateSliderProgress(){
          var progress = recorder.getCurrentTime() / Double(recorder.duration)
-         print(progress)
          if recorder.isPlaying == false || progress == .infinity{
              displayLink.invalidate()
              progress = 0.0
@@ -39,8 +38,7 @@ class recordingTableViewCell: UITableViewCell {
      }
      
      func playSlider(){
-         if recorder.isPlaying{
-             print("Playing")
+    if recorder.isPlaying{
      displayLink = CADisplayLink(target: self, selector: #selector(self.updateSliderProgress))
      self.displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.default)
          }

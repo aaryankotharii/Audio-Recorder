@@ -77,7 +77,7 @@ class AKAudioRecorder: NSObject {
                     isRecording = true
                     self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.updateDuration), userInfo: nil, repeats: true)
                     audioRecorder.record()
-                    print("recording now")
+                    debugLog("Recording")
                 } catch let recordingError as NSError{
                     print ("Error recording : %@", recordingError.localizedDescription)
             }
@@ -92,7 +92,7 @@ class AKAudioRecorder: NSObject {
             do {
                 try audioSession.setActive(false)
                 isRecording = false
-                print("Recording stopped")
+                debugLog("Recording Stopped")
                 } catch {
                 print("stop()",error.localizedDescription)
             }
@@ -104,7 +104,6 @@ class AKAudioRecorder: NSObject {
         if !isRecording && !isPlaying {
             if let fileName = fileName {
              let path = getDocumentsDirectory().appendingPathComponent(fileName+".m4a")
-                       print("playing")
                        do{
                         audioPlayer = try AVAudioPlayer(contentsOf: path)
                         (rate == nil) ? (audioPlayer.enableRate = false) : (audioPlayer.enableRate = true)
@@ -113,7 +112,7 @@ class AKAudioRecorder: NSObject {
                         audioPlayer.numberOfLoops = numberOfLoops ?? 0
                         audioPlayer.play()
                         isPlaying = true
-                        print("Recording play")
+                        debugLog("Playing")
                         completion(true)
                        }catch{
                            print(error.localizedDescription)
@@ -140,6 +139,7 @@ class AKAudioRecorder: NSObject {
                 audioPlayer.delegate = self
                 audioPlayer.play()
                 isPlaying = true
+                debugLog("Playing")
             } catch {
                 print("play(with name:), ",error.localizedDescription)
             }
@@ -152,6 +152,7 @@ class AKAudioRecorder: NSObject {
     func stopPlaying(){
         audioPlayer.stop()
         isPlaying = false
+        debugLog("Stopped playing")
     }
     
     func deleteRecording(name: String){
@@ -163,6 +164,7 @@ class AKAudioRecorder: NSObject {
             do {
                 try manager.removeItem(at: path)
                 removeRecordingFromArray(name: name)
+                debugLog("Recording Deleted")
             } catch {
                 print("delete()",error.localizedDescription)
             }
@@ -185,8 +187,7 @@ class AKAudioRecorder: NSObject {
         isPlaying = true
     }
     
-    func getTime() -> String {
-        print(duration.timeStringFormatter)
+    func getDuration() -> String {
         return duration.timeStringFormatter
     }
     
@@ -195,10 +196,8 @@ class AKAudioRecorder: NSObject {
     }
     
     private func checkRepeat(name: String) -> Bool{
-        print("name is",name)
         var count = 0
         if myRecordings.contains(name){
-            print("executed")
             count = myRecordings.filter{$0 == name}.count
         if count > 1{
             while count != 1{
@@ -209,7 +208,6 @@ class AKAudioRecorder: NSObject {
             return false
         }
         }
-        print("true")
         return true
     }
 
@@ -226,7 +224,6 @@ class AKAudioRecorder: NSObject {
          let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
          return paths[0]
      }
-    
 }
 
 
@@ -237,26 +234,26 @@ extension AKAudioRecorder : AVAudioRecorderDelegate{
         
         switch flag {
         case true:
-                print("record finish")
+            debugLog("record finish")
         case false:
-            print("record erorr")
+            debugLog("record erorr")
         }
             }
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         isRecording = false
-        print(error?.localizedDescription ?? "Error occured while encoding recorder")
+        debugLog(error?.localizedDescription ?? "Error occured while encoding recorder")
     }
 }
 
 extension AKAudioRecorder: AVAudioPlayerDelegate{
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         isPlaying = false
-        print("playing finish")
+        debugLog("playing finish")
     }
     
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
         isPlaying = false
-         print(error?.localizedDescription ?? "Error occured while encoding player")
+        debugLog(error?.localizedDescription ?? "Error occured while encoding player")
     }
 }
 
@@ -275,4 +272,12 @@ extension AKAudioRecorder{
     var getRecordings : [String]{
         return self.myRecordings
     }
+}
+
+public func debugLog(_ message: String) {
+    #if DEBUG
+    debugPrint("=======================================")
+    debugPrint(message)
+    debugPrint("=======================================")
+    #endif
 }

@@ -31,12 +31,10 @@ class ExampleViewController: UIViewController {
             animate(isRecording: true)
             recorder.stopRecording()
             tableView.reloadData()
-            print(recorder.getRecordings)
         } else{
             animate(isRecording: false)
             recorder.record()
             setTimer()
-            print(recorder.getTime())
         }
     }
 }
@@ -67,6 +65,15 @@ extension ExampleViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! recordingTableViewCell
         cell.slider.isHidden = true
+    }
+  
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let name = recorder.getRecordings[indexPath.row]
+            recorder.deleteRecording(name: name)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            debugLog("Deleted Recording")
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
