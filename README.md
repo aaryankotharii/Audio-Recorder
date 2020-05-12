@@ -82,6 +82,7 @@ var recorder = AKAudioRecorder.shared
        recorder.play()
 ```
 
+
  ###### Rate of Playback ( Set Property ) ⏭
  ```Swift
        recorder.rate // set Float to change rate of recording.
@@ -92,13 +93,13 @@ var recorder = AKAudioRecorder.shared
        recorder.play()
 ```
 
+
  ###### Your Saved Recordings ( Get Property ) 🔰
  ```Swift
        recorder.getRecordings // [String]
        will return an array of locations || name of recordings.
        //Can be used to display multiple recordings in tableView etc.
 ```     
-
 
 
 
